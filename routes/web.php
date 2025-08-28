@@ -1,8 +1,10 @@
 <?php
 
+use App\Http\Controllers\AboutUsController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\MainController;
 
-Route::get('/', function () { return 'Home'; })->name('index');
+Route::get('/', function(){return view('pages.home');})->name('index');
 
 Route::get('/produtos', function () {return 'Produtos';});
 
@@ -12,7 +14,7 @@ Route::get('/cadastro', function () {return 'Cadastro';});
 
 Route::get('/login', function () {return 'Login';});
 
-Route::get('/sobre', function () {return 'Sobre';});
+Route::get('/sobre', function(){return 'Sobre';})->name('about');
 
 Route::prefix('/admin')->group(function(){
     Route::get('/login', function () {return 'Admin Login';});
