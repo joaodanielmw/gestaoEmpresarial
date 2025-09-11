@@ -1,13 +1,10 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
-    <title>Document</title>
-</head>
-<body>
-    <h1>HOMEPAGE</h1>
-</body>
-</html>
+@extends('layouts.app')
+
+@section('content')
+    @include('components.carrousel')
+    <div class="container my-5 text-center">
+        <a href="{{ url('/produtos') }}" class="btn btn-primary btn-lg px-5">
+            Confira Nossos Produtos
+        </a>
+    </div>
+@endsection

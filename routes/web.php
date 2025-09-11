@@ -1,35 +1,40 @@
 <?php
 
 use App\Http\Controllers\AboutUsController;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MainController;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\UserController;
 
-Route::get('/', function(){return view('pages.home');})->name('index');
+Route::get('/', [HomeController::class, 'index'])->name('index');
 
-Route::get('/produtos', function () {return 'Produtos';});
+Route::get('/produtos', [ProductController::class,'index']);
 
-Route::get('/produtos/{id}', function (Int $id) {return 'Produtos id -> '.$id;})->where('id', '[0-9]+');
+Route::get('/produtos/{id}', function(int $id) {return view('pages.products.show');})->where('id', '[0-9]+');
 
-Route::get('/cadastro', function () {return 'Cadastro';});
+Route::get('/cadastro', [UserController::class,'create']);
 
-Route::get('/login', function () {return 'Login';});
+Route::get('/login', [UserController::class,'index']);
 
 Route::get('/sobre', function(){return 'Sobre';})->name('about');
 
+
 Route::prefix('/admin')->group(function(){
-    Route::get('/login', function () {return 'Admin Login';});
+    Route::get('/', function () {return redirect('/admin/dashboard');});
 
-    Route::get('/dashboard', function () {return 'Admin Dashboard';});
+    Route::get('/login', [AdminController::class,'index']);
 
-    Route::get('/clientes', function () {return 'Admin Clientes';});
+    Route::get('/dashboard', function () {return view('pages.admin.dashboard');});
 
-    Route::get('/clientes/{id?}', function (Int $id) {return 'Admin Clentes id -> '.$id;})->where('id', '[0-9]+');
+    Route::get('/clientes', function () {return view('pages.admin.costumers.index');});
 
-    Route::get('/fornecedores', function () {return 'Admin Fornecedores';});
+    Route::get('/clientes/{id?}', function (Int $id) {return view('pages.admin.costumers.show');})->where('id', '[0-9]+');
 
-    Route::get('/produtos', function () {return 'Admin Produtos';});
+    Route::get('/produtos', function () {return view('pages.admin.products.index');});
 
-    Route::get('/produto/{slug}', function (String $slug) {return 'Admin Produtos slug -> '.$slug;})->where('slug', '[A-Za-z]+');
+    Route::get('/produtos/{id?}', function (int $id) {return view('pages.admin.products.show');})->where('id', '[0-9]+');
 });
 
 Route::fallback(function(){

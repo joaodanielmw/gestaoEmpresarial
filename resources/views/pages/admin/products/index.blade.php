@@ -8,10 +8,10 @@
         </a>
     </div>
     
-    <h1 class="text-center mb-5">Gerenciar Clientes</h1>
+    <h1 class="text-center mb-5">Gerenciar Produtos</h1>
     
     <div class="row">
-        @include('components.perfil')
+        @include('components.product')
     </div>
 </div>
 @endsection
